@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+	
+{% endblock titulo %}
+
+{% block contenido %}
+<center>
+	<h2>Ingresa su usuario y contraseña para iniciar sesión</h2>
+	
+	<h4>{{msj}}</h4>
+</center>
+<div class="row justify-content-center">
+	<form action="" method="POST">
+		{% csrf_token %}
+		{{ formulario.as_p }}
+		<input class="btn btn-primary" type="submit" name="Login">
+		<a href="{% url 'register' %}"> o Registrate</a>
+	</form>
+</div>
+
+{% endblock contenido %}

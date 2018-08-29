@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+	
+{% endblock titulo %}
+
+{% block contenido %}
+	<center>
+		<h1>{{ accion }} Producto</h1>
+	</center>
+	<div class="row justify-content-center">
+		
+		<form action="" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{formulario.as_p}}
+			<input class="btn btn-primary" type="submit" name="Agregar" value="Guardar Cambios">
+			
+		</form>
+	</div>
+	<center>
+		<a href="{% url 'lista_productos' %}">regresar a lista productos</a>
+	</center>
+
+
+{% endblock contenido %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+	
+{% endblock %}
+
+{% block contenido %}
+	<h1>lista de Productos</h1>
+	{% if request.user.is_authenticated and request.user.is_superuser %}
+		<div class="">
+			<a class="btn btn-outline-primary" href="{% url 'agregar_producto' %}"> <div class="fas fa-plus"></div> Agregar producto</a>		
+		</div>	
+	{% endif %}
+	<br>
+	<div class="">
+			
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">id</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Precio</th>
+					<th scope="col">Marca</th>
+					<th scope="col">Imagen</th>
+					<th scope="col">Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for x in lista %}
+					<tr>
+						<th scope="row">{{ forloop.counter }}</th>
+						<td>{{ x.id }}</td>
+						<td>{{ x.nombre }}</td>
+						<td>{{ x.precio }}</td>
+						<td>{{ x.marca }}</td>
+						<td>
+							{% if x.foto %}
+								<img src="/media/{{ x.foto }}" width="60px">
+							{% endif %}
+						</td>
+						<td>
+							<a href="{% url 'ver_producto' id_prod=x.id   %}"><div class="fas fa-search" ></div></a>
+							{% if request.user.is_authenticated and request.user.is_superuser %}
+								<a href="{% url 'editar_producto' id_prod=x.id   %}"><div class="fas fa-edit" ></div></a>
+								<a href="{% url 'eliminar_producto' id_prod=x.id   %}"><div class="fas fa-trash" ></div></a>
+								<a href="{% url 'desactivar_producto' id_prod=x.id   %}"> <div class="fas fa-lock" ></div></a>
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	
+{% endblock %}
